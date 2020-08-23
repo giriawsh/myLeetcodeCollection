@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变*/
+    function reOrderArray(array) {
+        let oddArray = [];
+        let evenArray = [];
+        for(let i = 0; i < array.length; i++)
+        {
+            if(array[i]%2 === 0){
+                evenArray.push(array[i]);
+            }else{
+                oddArray.push(array[i]);
+            }
+        }
+        return oddArray.concat(evenArray);
+    }
+    console.log(reOrderArray([1,2,3,4,5,6]));
+    function reOrderArray2(array) {
+        let k = 0;
+        for(let i = 0; i < array.length; i++)
+        {
+            let tmp = array[i];
+            if(tmp & 1){//是奇数
+                for(let j = i - 1; j >= k; j--)//到已经排序好的为止
+                {
+                    array[j+1] = array[j];
+                }
+                array[k++] = tmp;
+            }
+        }
+        return array;
+    }
+    console.log(reOrderArray2([1,2,3,4,5,6]));
+</script>
+</body>
+</html>

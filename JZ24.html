@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。*/
+    function TreeNode(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+
+    var path;
+    var res;
+
+    function FindPath(root, expectNumber) {
+        // write code here
+        path = [];
+        res = [];
+        if (root == null) return [];
+        calculatePath(root, expectNumber);
+        return path;
+    }
+
+    function calculatePath(node, expectNumber) {
+        let val = node.val;
+        res.push(val);//记录值相当于记录路径
+        if (val == expectNumber && node.left == null && node.right == null) {
+            path.push(res.slice());//找到路，把现在存储的路径返回
+        } else {
+            if (node.left != null) calculatePath(node.left, expectNumber - val);//左子树有值，可以继续往下走
+            if (node.right != null) calculatePath(node.right, expectNumber - val);
+        }
+        res.pop();//上一条路已经选择完了，可以退出到父节点上
+    }
+</script>
+</body>
+</html>

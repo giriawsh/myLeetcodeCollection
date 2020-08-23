@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true,否则返回false。假设输入的数组的任意两个数字都互不相同。*/
+    /**
+     * @return {boolean}
+     */
+    function VerifySquenceOfBST(sequence) {
+        // write code here
+        if (!sequence || sequence.length === 0) return false;
+        return isBST(sequence, 0, sequence.length - 1);
+    }
+
+    function isBST(sequence, start, end) {
+        if (start >= end) return true;//无序列可找了
+        let split = start;//寻找左右子树的断点位置
+        let val = sequence[end];//根节点是后序遍历序列中的最后一个
+        for (; split < end && sequence[split] < val; split++) ;//左子树都是小于根节点的,此时的split既是断点位置(右子树起点)
+        for (let i = split; i < end; i++) {
+            if (sequence[i] < val) {
+                return false;//如果右子树中有小于的数，就是错的
+            }
+        }
+        return isBST(sequence, start, split - 1) && isBST(sequence, split, end - 1);//end-1是必须的，需要把此次已经匹配掉的root给拿掉
+    }
+</script>
+</body>
+</html>

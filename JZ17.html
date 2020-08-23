@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）*/
+     function TreeNode(x) {
+    this.val = x;
+    this.left = null;
+    this.right = null;
+}
+    /**
+     * @return {boolean}
+     */
+    function HasSubtree(pRoot1, pRoot2)
+    {
+        // write code here
+        var result = false;
+        if(pRoot1 != null && pRoot2 != null)//如果root为零，直接返回false
+        {
+            //看以当前根节点作为基准是否和root2一致，如果不一致找左子树，再找右子树
+            return (doeTreeHaveSubTree(pRoot1, pRoot2) || HasSubtree(pRoot1.left, pRoot2) || HasSubtree(pRoot1.right, pRoot2));
+        }
+        return result;
+    }
+    function doeTreeHaveSubTree(node1, node2) {
+        if(node2 === null)
+        {
+            return true;//要找的树已经遍历完了，ok
+        }
+        if(node1 === null)
+        {
+            return false;
+        }
+        if(node1.val !== node2.val)
+        {
+            return false;//没匹配上
+        }
+        return doeTreeHaveSubTree(node1.left, node2.left) && doeTreeHaveSubTree(node1.right, node2.right);//分别匹配左右子树
+    }
+</script>
+</body>
+</html>
