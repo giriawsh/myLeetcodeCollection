@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="437d4330-f990-403d-9fee-b4d23760646a" name="Default Changelist" comment="" />
+    <list default="true" id="437d4330-f990-403d-9fee-b4d23760646a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1598096596786</updated>
       <workItem from="1598096599463" duration="12188000" />
-      <workItem from="1598167999362" duration="9732000" />
+      <workItem from="1598167999362" duration="9992000" />
     </task>
     <servers />
   </component>
@@ -72,6 +74,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="648" y="307" key="git4idea.merge.GitPullDialog" timestamp="1598194460991">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="648" y="307" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598194460991" />
+    <state x="755" y="380" key="git4idea.rebase.GitRebaseDialog" timestamp="1598194337436">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="755" y="380" key="git4idea.rebase.GitRebaseDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598194337436" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1598096645366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
