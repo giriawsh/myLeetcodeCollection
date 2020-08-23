@@ -963,3 +963,166 @@ function printMatrix(matrix)
         //也可以return Math.min.apply(this, stack)
     }
 ```
+
+# JZ21 栈的压入和弹出序列
+## 题目描述
+输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
+## 解题思路
+构造一个验证栈，当push和pop栈不相等时，说明此时进行的只是压栈，把push栈中的元素压入验证栈中，push指针后移；如果相等，说明此时元素被弹出，将验证栈中元素弹出，push指针pop指针后移，同时进行连续验证（pop后面的指针元素是否与先前压入的元素一致）。
+```js
+function IsPopOrder(pushV, popV) {
+    // write code here
+    //1,2,3,4,5  4,5,3,2,1  4,3,5,1,2
+    let stackV = [];
+    let indexPush = 0;
+    let indexPop = 0;
+    while (indexPop < popV.length && indexPush < pushV.length) {
+        if (pushV[indexPush] !== popV[indexPop]) {
+            //不相等，继续压
+            stackV.push(pushV[indexPush]);
+            indexPush++;
+        } else {
+            //相等，指针后移，弹出栈中与pop匹配元素
+            indexPop++;
+            indexPush++;
+            while (stackV.length !== 0 && stackV[stackV.length - 1] === popV[indexPop]) {
+                indexPop++;
+                stackV.pop();
+            }
+        }
+    }
+    return stackV.length === 0;
+}
+```
+# JZ22 从上往下打印二叉树
+## 题目描述
+从上往下打印出二叉树的每个节点，同层节点从左至右打印。
+## 解答
+基本思路，构造返回队列，每次推入当前节点的左子树，再推入右子树。然后按照队列顺序先打印左子树的值，再打印右子树的值。
+```js
+function PrintFromTopToBottom(root) {
+    // write code here
+    if (!root) return [];
+    let queue = [];
+    let ret = [];
+    queue.push(root);
+    while (queue.length !== 0) {
+        let node = queue.shift();//每次取头，构造队列
+        ret.push(node.val);
+        if (node.left) {
+            queue.push(node.left);
+        }
+        if (node.right) {
+            queue.push(node.right);
+        }
+    }
+    return ret;
+}
+```
+# JZ23 二叉搜索树的后序遍历序列
+## 题目描述
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true,否则返回false。假设输入的数组的任意两个数字都互不相同。
+## 解答
+先复习下二叉搜索树：
+
+在二叉搜索树中：
+1. 若任意结点的左子树不空，则左子树上所有结点的值均不大于它的根结点的值。
+2. 若任意结点的右子树不空，则右子树上所有结点的值均不小于它的根结点的值。
+3. 任意结点的左、右子树也分别为二叉搜索树。
+
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6162522ca2a24e2b87c839cda0916875~tplv-k3u1fbpfcp-zoom-1.image)
+
+后序遍历（左右根），二叉搜索树（左<根<右）
+
+这题的思路其实很简单，根据后序遍历可以知道每串树序列的最后一个一定是根节点，那么只要判断出左右子树的位置就可以了,所以从左到右扫一遍只要找到第一个比根大的点，就是右子树的串起始位置。区分出左右子树后再进行递归判断。
+```js
+function VerifySquenceOfBST(sequence) {
+    // write code here
+    if (!sequence || sequence.length === 0) return false;
+    return isBST(sequence, 0, sequence.length - 1);
+}
+
+function isBST(sequence, start, end) {
+    if (start >= end) return true;//无序列可找了
+    let split = start;//寻找左右子树的断点位置
+    let val = sequence[end];//根节点是后序遍历序列中的最后一个
+    for (; split < end && sequence[split] < val; split++) ;//左子树都是小于根节点的,此时的split既是断点位置(右子树起点)
+    for (let i = split; i < end; i++) {
+        if (sequence[i] < val) {
+            return false;//如果右子树中有小于的数，就是错的
+        }
+    }
+    return isBST(sequence, start, split - 1) && isBST(sequence, split, end - 1);//end-1是必须的，需要把此次已经匹配掉的root给拿掉，因为它不属于右子树的一部分
+}
+```
+# JZ24 二叉树中和为某一值的路径
+## 题目描述
+输入一颗二叉树的根节点和一个整数，按字典序打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+## 解答
+定义全局数组进行存储，深度优先遍历进行数值计算，如果等于所给值，记录此条路径，否则将结点进行弹出检查右边路径。
+```js
+var path;
+var res;
+
+function FindPath(root, expectNumber) {
+    // write code here
+    path = [];
+    res = [];
+    if (root == null) return [];
+    calculatePath(root, expectNumber);
+    return path;
+}
+
+function calculatePath(node, expectNumber) {
+    let val = node.val;
+    res.push(val);//记录值相当于记录路径
+    if (val == expectNumber && node.left == null && node.right == null) {
+        path.push(res.slice());//找到路，把现在存储的路径返回
+    } else {
+        if (node.left != null) calculatePath(node.left, expectNumber - val);//左子树有值，可以继续往下走
+        if (node.right != null) calculatePath(node.right, expectNumber - val);
+    }
+    res.pop();//上一条路已经选择完了，可以退出到父节点上
+}
+```
+# JZ25 复杂链表的复制
+## 题目描述
+输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针random指向一个随机节点），请对此链表进行深拷贝，并返回拷贝后的头结点。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
+## 解法
+这个我觉得还是有点复杂，可以想到的直觉就是先扫一遍复制基础的，然后再针对每个结点再扫一遍拿到random同时进行去重操作，但是这样复杂度就有点高了。
+
+看到大佬们给出了一种漂亮的解法，把第一遍扫的复制的一般关系直接挂在相对应的前面结点的后头，这样在找random结点的时候就不用害怕重复性了。
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/960563f7ec8e4100b143d76d9845202c~tplv-k3u1fbpfcp-zoom-1.image)
+```js
+function Clone(pHead) {
+    // write code here
+    if (pHead === null) return null;
+    let currentNode = pHead;
+    //第一遍扫，复制一般关系，插入到对应结点之后
+    while (currentNode !== null) {
+        let cloneNode = new RandomListNode(currentNode.label);//加入的结点原本不存在需要new
+        let nextNode = currentNode.next;
+        currentNode.next = cloneNode;
+        cloneNode.next = nextNode;
+        currentNode = nextNode;
+    }
+
+    //第二遍扫，把random关系添加上（只要添加到相应位置的next结点上就可以了）
+    currentNode = pHead;
+    while (currentNode !== null) {
+        currentNode.next.random = currentNode.random === null ? null : currentNode.random.next;
+        currentNode = currentNode.next.next;
+    }
+
+    //第三遍扫，每各一个分开
+    currentNode = pHead;
+    let retNode = pHead.next;
+    while (currentNode !== null) {
+        let cloneNode = currentNode.next;
+        currentNode.next = cloneNode.next;
+        cloneNode.next = cloneNode.next === null ? null : cloneNode.next.next;
+        currentNode = currentNode.next;
+    }
+    return retNode;
+}
+```

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="437d4330-f990-403d-9fee-b4d23760646a" name="Default Changelist" comment="" />
+    <list default="true" id="437d4330-f990-403d-9fee-b4d23760646a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,14 +67,34 @@
       <option name="presentableId" value="Default" />
       <updated>1598096596786</updated>
       <workItem from="1598096599463" duration="12188000" />
-      <workItem from="1598167999362" duration="10313000" />
+      <workItem from="1598167999362" duration="11119000" />
     </task>
+    <task id="LOCAL-00001" summary="add readme">
+      <created>1598194979169</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598194979169</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readme" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="558" y="30" key="CommitChangelistDialog2" timestamp="1598194978382">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="558" y="30" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1598194978382" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1598194985571">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1598194985571" />
     <state x="648" y="307" key="git4idea.merge.GitPullDialog" timestamp="1598194460991">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
